@@ -1,21 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {View, StyleSheet, Text, StatusBar} from 'react-native'
 import SearchBar from './searchbar'
 import theme from './theme'
 import IconButton from './iconbutton'
+import NoteInput from './noteinput'
 
 const Homepage = () => {
+    const [modalVisible, setModalVisible] = useState(false)
+
+    const handleOnSubmit = (title, description) => {
+        //TODO : this shit
+    }
+
     return (
         <>
         <StatusBar barStyle='dark-content' backgroundColor = {theme.light}/>
         <View style = {styles.container}>
-            <Text style = {styles.header}>Note Screen</Text>
-            <SearchBar containerStyle={{marginVertical: 15}}/>
+            <Text style = {styles.header}>Notes</Text>
+            <SearchBar containerStyle = {{marginVertical: 15}}/>
             <View style = {[StyleSheet.absoluteFillObject ,styles.emptyHeaderContainer]}> 
                 <Text style = {styles.emptyHeader}>Add Notes</Text>
-                <IconButton antIconName = 'plus' style = {styles.addButton}/>
+                <IconButton onPress = {() => setModalVisible(true)} antIconName = 'plus' style = {styles.addButton}/>
             </View>
         </View>
+        <NoteInput visible = {modalVisible} onClose = {() => setModalVisible(false)} onSubmit = {handleOnSubmit}/>
         </>
     )
 }
