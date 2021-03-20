@@ -27,11 +27,21 @@ const NoteInput = ({visible, onClose, onSubmit, note, isEdit}) => {
         if (!title.trim() && !description.trim()) return onClose()
 
         if (isEdit) {
-            onSubmit(title, description);
+            onSubmit(title, description, Date.now())
+        } else {
+            onSubmit(title, description)
             setTitle('')
             setDescription('')
         }
-        onClose('')
+        onClose()
+    }
+
+    const closeBox = () => {
+        if (!isEdit) {
+            setTitle('')
+            setDescription('')
+        }
+        onClose()
     }
 
     return (
@@ -54,7 +64,7 @@ const NoteInput = ({visible, onClose, onSubmit, note, isEdit}) => {
                     />
                 <View style = {styles.buttonContainer}>
                     <IconButton size = {15} antIconName = 'check' onPress = {handleSubmit}/>
-                    {title.trim() || description.trim() ? <IconButton size = {15} style = {{marginLeft: 15}} antIconName = 'close' onPress = {onClose}/> : null}
+                    {title.trim() || description.trim() ? <IconButton size = {15} style = {{marginLeft: 15}} antIconName = 'close' onPress = {closeBox}/> : null}
                 </View>
             </View>
             <TouchableWithoutFeedback onPress = {handleBoxClose}>
