@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import theme from "./components/theme";
+import theme from "./theme";
 
 const styles = StyleSheet.create({
   icon: {

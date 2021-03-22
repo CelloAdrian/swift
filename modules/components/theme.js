@@ -9,3 +9,4 @@ export default {
   primary: "#6F6FC8",
   error: "#ff0000",
 };
+// note that the naming convention of these color names are temporary

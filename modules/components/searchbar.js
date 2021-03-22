@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
-import theme from "./components/theme";
+import theme from "./theme";
 
 const styles = StyleSheet.create({
   searchBar: {

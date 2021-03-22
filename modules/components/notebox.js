@@ -5,7 +5,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import theme from "./components/theme";
+import theme from "./theme";
 
 const styles = StyleSheet.create({
   container: {

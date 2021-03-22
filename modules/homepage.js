@@ -12,7 +12,7 @@ import {
 import SearchBar from "./components/searchbar";
 import theme from "./components/theme";
 import IconButton from "./components/iconbutton";
-import NoteInput from "./components/noteinput";
+import NoteInput from "./noteinput";
 import Notes from "./components/notebox";
 
 // TODO: dynamic font sizes, by pixel ratio or phone dimensions
@@ -94,7 +94,6 @@ const Homepage = ({ navigation }) => {
             <View
               style={[StyleSheet.absoluteFill, styles.emptyHeaderContainer]}
             >
-              <Image source={require("../assets/Splash1.svg")} />
               <Text style={styles.emptyHeader}>Add Notes</Text>
             </View>
           ) : null}
