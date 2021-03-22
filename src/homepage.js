@@ -14,6 +14,7 @@ import theme from "./components/theme";
 import IconButton from "./components/iconbutton";
 import NoteInput from "./noteinput";
 import Notes from "./components/notebox";
+import { useNotes } from "./context/noteprovider";
 
 // TODO: dynamic font sizes, by pixel ratio or phone dimensions
 const styles = StyleSheet.create({
@@ -45,22 +46,15 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 15,
     bottom: 50,
+    zIndex: 1,
   },
 });
 
 const Homepage = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [notes, setNotes] = useState([]);
+  const { notes, setNotes } = useNotes();
 
-  const findNotes = async () => {
-    const result = await AsyncStorage.getItem("notes");
-    console.log(result);
-    if (result !== null) setNotes(JSON.parse(result));
-  };
-
-  useEffect(() => {
-    findNotes();
-  }, []);
+  useEffect(() => {}, []);
 
   const handleOnSubmit = async (title, description) => {
     const note = { id: Date.now(), title, description, time: Date.now() };
