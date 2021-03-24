@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: theme.primary,
     fontSize: 20,
-    color: theme.dark,
+    color: theme.light,
   },
   title: {
     height: 40,
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   boxbg: {
     flex: 1,
     zIndex: -1,
+    backgroundColor: theme.dark_bg,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -91,6 +92,7 @@ const NoteInput = ({ visible, onClose, onSubmit, note, isEdit }) => {
             placeholder="Title"
             value={title}
             style={[styles.input, styles.title]}
+            placeholderTextColor={theme.text_color}
             onChangeText={(text) => handleOnChangeText(text, "title")}
           />
           <TextInput
@@ -98,6 +100,7 @@ const NoteInput = ({ visible, onClose, onSubmit, note, isEdit }) => {
             value={description}
             multiline
             style={[styles.input, styles.description]}
+            placeholderTextColor={theme.text_color}
             onChangeText={(text) => handleOnChangeText(text, "description")}
           />
           <View style={styles.buttonContainer}>
