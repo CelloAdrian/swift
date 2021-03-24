@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, ScrollView, StyleSheet, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useHeaderHeight } from "@react-navigation/stack";
 import theme from "./theme";
 import IconButton from "./iconbutton";
 import { useNotes } from "../context/noteprovider";
+import NoteInput from "../noteinput";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 15,
-    backgroundColor: theme.dark_bg
+    backgroundColor: theme.dark_bg,
   },
   title: {
     fontSize: 30,
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 20,
-    color: theme.light
+    color: theme.light,
   },
   date: {
     textAlign: "right",
@@ -47,15 +48,15 @@ const LastUpdated = (ms) => {
 };
 
 const NoteDetail = (props) => {
-  const { note } = props.route.params;
   const { setNotes } = useNotes();
+  const [note, setNote] = useState(props.route.params.note);
+  const [showModal, setShowModal] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   const deleteNote = async () => {
     const result = await AsyncStorage.getItem("notes");
     let notes = [];
-    if (result !== null) {
-      notes = JSON.parse(result);
-    }
+    if (result !== null) notes = JSON.parse(result);
     const newNotes = notes.filter((n) => n.id !== note.id);
     setNotes(newNotes);
     await AsyncStorage.setItem("notes", JSON.stringify(newNotes));
@@ -73,6 +74,30 @@ const NoteDetail = (props) => {
     );
   };
 
+  const handleUpdate = async (title, description, time) => {
+    const result = await AsyncStorage.getItem("notes");
+    let notes = [];
+    if (result !== null) notes = JSON.parse(result);
+
+    const newNotes = notes.filter((n) => {
+      if (n.id === note.id) {
+        (n.title = title), (n.description = description), (n.time = time);
+        n.isUpdated = true;
+        setNote(n);
+      }
+      return n;
+    });
+
+    setNotes(newNotes);
+    await AsyncStorage.setItem("notes", JSON.stringify(newNotes));
+  };
+  const handleOnClose = () => setShowModal(false);
+
+  const openEditModal = () => {
+    setIsEdit(true);
+    setShowModal(true);
+  };
+
   return (
     <ScrollView
       contentContainerStyle={[
@@ -80,7 +105,11 @@ const NoteDetail = (props) => {
         { paddingTop: useHeaderHeight() },
       ]}
     >
-      <Text style={styles.date}>{LastUpdated(note.time)}</Text>
+      <Text style={styles.date}>
+        {note.isUpdated
+          ? `Last Updated ${LastUpdated(note.time)}`
+          : `Created At ${LastUpdated(note.time)}`}
+      </Text>
       <Text style={styles.title}>{note.title}</Text>
       <Text style={styles.description}>{note.description}</Text>
       <View style={styles.buttonContainer}>
@@ -89,8 +118,15 @@ const NoteDetail = (props) => {
           style={{ backgroundColor: theme.error, marginBottom: 15 }}
           onPress={displayDeleteAlert}
         />
-        <IconButton antIconName="edit" />
+        <IconButton antIconName="edit" onPress={openEditModal} />
       </View>
+      <NoteInput
+        isEdit={isEdit}
+        note={note}
+        onClose={handleOnClose}
+        onSubmit={handleUpdate}
+        visible={showModal}
+      />
     </ScrollView>
   );
 };
