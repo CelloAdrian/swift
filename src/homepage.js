@@ -50,11 +50,23 @@ const styles = StyleSheet.create({
   },
 });
 
-const Homepage = ({ navigation }) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const { notes, setNotes } = useNotes();
+const reverseData = data => {
+  return data.sort((a, b) => {
+    const aInt = parseInt(a.time)
+    const bInt = parseInt(b.time)
+    if (aInt < bInt) return 1;
+    if (aInt == bInt) return 0;
+    if (aInt > bInt) return -1;
+  })
+}
 
-  useEffect(() => {}, []);
+const Homepage = ({ navigation }) => {
+  const { notes, setNotes, findNotes } = useNotes();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [resultNotFound, setResultNotFound] = useState(false)
+
+  useEffect(() => { }, []);
 
   const handleOnSubmit = async (title, description) => {
     const note = { id: Date.now(), title, description, time: Date.now() };
@@ -63,9 +75,36 @@ const Homepage = ({ navigation }) => {
     await AsyncStorage.setItem("notes", JSON.stringify(updatedNotes));
   };
 
+  const reverseNotes = reverseData(notes)
+
   const openNote = (note) => {
     navigation.navigate("NoteDetail", { note });
   };
+
+  const handleOnSearchInput = async (text) => {
+    setSearchQuery(text);
+    if (!text.trim()) {
+      setSearchQuery('')
+      setResultNotFound(false)
+      return await findNotes()
+    }
+    const filteredNotes = notes.filter((note) => {
+      if (note.title.toLowerCase().includes(text.toLowerCase)) {
+        return note;
+      }
+    });
+    if (filteredNotes.length) {
+      setNotes([...filteredNotes]);
+    } else {
+      setResultNotFound(true)
+    }
+  };
+
+  const handleOnClear = async () => {
+    setSearchQuery('')
+    setResultNotFound(false)
+    await findNotes()
+  }
 
   return (
     <>
@@ -74,16 +113,22 @@ const Homepage = ({ navigation }) => {
         <View style={styles.container}>
           <Text style={styles.header}>Notes</Text>
           {notes.length ? (
-            <SearchBar containerStyle={{ marginVertical: 15 }} />
+            <SearchBar
+              value={searchQuery}
+              onChangeText={handleOnSearchInput}
+              containerStyle={{ marginVertical: 15 }}
+              onClear={handleOnClear}
+            />
           ) : null}
-          <FlatList
-            data={notes}
-            numColumns={1}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <Notes onPress={() => openNote(item)} item={item} />
-            )}
-          />
+          {resultNotFound ? <NotFound /> :
+            <FlatList
+              data={reverseNotes}
+              numColumns={1}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => (
+                <Notes onPress={() => openNote(item)} item={item} />
+              )}
+            />}
           {!notes.length ? (
             <View
               style={[StyleSheet.absoluteFill, styles.emptyHeaderContainer]}
