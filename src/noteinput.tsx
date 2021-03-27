@@ -1,3 +1,4 @@
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -7,8 +8,10 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import theme from "./components/theme";
+// @ts-expect-error ts-migrate(6142) FIXME: Module './components/iconbutton' was resolved to '... Remove this comment to see the full error message
 import IconButton from "./components/iconbutton";
 
 const styles = StyleSheet.create({
@@ -85,16 +88,21 @@ const NoteInput = ({ visible, onClose, onSubmit, note, isEdit }) => {
 
   return (
     <>
+      {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
       <StatusBar hidden />
+      {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
       <Modal visible={visible} animationType="slide">
+        {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         <View style={styles.container}>
           <TextInput
+            // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             placeholder="Title"
             value={title}
             style={[styles.input, styles.title]}
             placeholderTextColor={theme.text_color}
             onChangeText={(text) => handleOnChangeText(text, "title")}
           />
+          {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
           <TextInput
             placeholder="Note"
             value={description}
@@ -103,9 +111,12 @@ const NoteInput = ({ visible, onClose, onSubmit, note, isEdit }) => {
             placeholderTextColor={theme.text_color}
             onChangeText={(text) => handleOnChangeText(text, "description")}
           />
+          {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
           <View style={styles.buttonContainer}>
+            {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
             <IconButton size={15} antIconName="check" onPress={handleSubmit} />
             {title.trim() || description.trim() ? (
+              // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
               <IconButton
                 size={15}
                 style={{ marginLeft: 15 }}
@@ -113,8 +124,10 @@ const NoteInput = ({ visible, onClose, onSubmit, note, isEdit }) => {
                 onPress={closeBox}
               />
             ) : null}
+          {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
           </View>
         </View>
+        {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         <TouchableWithoutFeedback onPress={handleBoxClose}>
           <View style={[StyleSheet.absoluteFillObject, styles.boxbg]} />
         </TouchableWithoutFeedback>

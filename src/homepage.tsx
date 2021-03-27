@@ -1,3 +1,4 @@
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
@@ -8,12 +9,18 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   FlatList,
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
+// @ts-expect-error ts-migrate(6142) FIXME: Module './components/searchbar' was resolved to 'C... Remove this comment to see the full error message
 import SearchBar from "./components/searchbar";
 import theme from "./components/theme";
+// @ts-expect-error ts-migrate(6142) FIXME: Module './components/iconbutton' was resolved to '... Remove this comment to see the full error message
 import IconButton from "./components/iconbutton";
+// @ts-expect-error ts-migrate(6142) FIXME: Module './noteinput' was resolved to 'C:/Users/cel... Remove this comment to see the full error message
 import NoteInput from "./noteinput";
+// @ts-expect-error ts-migrate(6142) FIXME: Module './components/notebox' was resolved to 'C:/... Remove this comment to see the full error message
 import Notes from "./components/notebox";
+// @ts-expect-error ts-migrate(6142) FIXME: Module './context/noteprovider' was resolved to 'C... Remove this comment to see the full error message
 import { useNotes } from "./context/noteprovider";
 
 // TODO: dynamic font sizes, by pixel ratio or phone dimensions
@@ -108,12 +115,16 @@ const Homepage = ({ navigation }) => {
 
   return (
     <>
+      {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
       <StatusBar barStyle="dark-content" backgroundColor={theme.text_color} />
+      {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
           <Text style={styles.header}>Notes</Text>
           {notes.length ? (
             <SearchBar
+              // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
               value={searchQuery}
               onChangeText={handleOnSearchInput}
               containerStyle={{ marginVertical: 15 }}
@@ -121,28 +132,35 @@ const Homepage = ({ navigation }) => {
             />
           ) : null}
           {resultNotFound ? <NotFound /> :
+            // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <FlatList
+              // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
               data={reverseNotes}
               numColumns={1}
               keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
+                // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                 <Notes onPress={() => openNote(item)} item={item} />
               )}
             />}
           {!notes.length ? (
             <View
+              // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
               style={[StyleSheet.absoluteFill, styles.emptyHeaderContainer]}
             >
+              {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
               <Text style={styles.emptyHeader}>Add Notes</Text>
             </View>
           ) : null}
         </View>
       </TouchableWithoutFeedback>
       <IconButton
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         onPress={() => setModalVisible(true)}
         antIconName="plus"
         style={styles.addButton}
       />
+      {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
       <NoteInput
         visible={modalVisible}
         onClose={() => setModalVisible(false)}

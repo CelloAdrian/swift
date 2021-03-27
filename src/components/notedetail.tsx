@@ -1,10 +1,15 @@
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import React, { useState } from "react";
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, ScrollView, StyleSheet, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useHeaderHeight } from "@react-navigation/stack";
 import theme from "./theme";
+// @ts-expect-error ts-migrate(6142) FIXME: Module './iconbutton' was resolved to 'C:/Users/ce... Remove this comment to see the full error message
 import IconButton from "./iconbutton";
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../context/noteprovider' was resolved to '... Remove this comment to see the full error message
 import { useNotes } from "../context/noteprovider";
+// @ts-expect-error ts-migrate(6142) FIXME: Module '../noteinput' was resolved to 'C:/Users/ce... Remove this comment to see the full error message
 import NoteInput from "../noteinput";
 
 const styles = StyleSheet.create({
@@ -100,27 +105,35 @@ const NoteDetail = (props) => {
 
   return (
     <ScrollView
+      // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       contentContainerStyle={[
         styles.container,
         { paddingTop: useHeaderHeight() },
       ]}
     >
       <Text style={styles.date}>
+        {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         {note.isUpdated
           ? `Last Updated ${LastUpdated(note.time)}`
           : `Created At ${LastUpdated(note.time)}`}
       </Text>
+      {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
       <Text style={styles.title}>{note.title}</Text>
+      {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
       <Text style={styles.description}>{note.description}</Text>
+      {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
       <View style={styles.buttonContainer}>
         <IconButton
+          // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
           antIconName="delete"
           style={{ backgroundColor: theme.error, marginBottom: 15 }}
           onPress={displayDeleteAlert}
         />
+        {/* @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message */}
         <IconButton antIconName="edit" onPress={openEditModal} />
       </View>
       <NoteInput
+        // @ts-expect-error ts-migrate(17004) FIXME: Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         isEdit={isEdit}
         note={note}
         onClose={handleOnClose}
