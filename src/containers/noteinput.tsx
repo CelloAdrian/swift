@@ -18,11 +18,9 @@ interface Props {
   onSubmit: any;
   note: any;
   isEdit: any;
-  text: any;
-  valueFor: any;
 }
 
-const NoteInput = ({ visible, onClose, onSubmit, note, isEdit }:Props) => {
+const NoteInput = ({ visible, onClose, onSubmit, note, isEdit }: Props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -37,7 +35,7 @@ const NoteInput = ({ visible, onClose, onSubmit, note, isEdit }:Props) => {
     }
   }, [isEdit]);
 
-  const handleOnChangeText = ({text, valueFor}:Props) => {
+  const handleOnChangeText = ({ text, valueFor }) => {
     if (valueFor === "title") setTitle(text);
     if (valueFor === "description") setDescription(text);
   };
@@ -73,7 +71,9 @@ const NoteInput = ({ visible, onClose, onSubmit, note, isEdit }:Props) => {
             value={title}
             style={[styles.input, styles.title]}
             placeholderTextColor={theme.text_color}
-            onChangeText={(text) => handleOnChangeText(text, "title")}
+            onChangeText={(text) =>
+              handleOnChangeText({ text, valueFor: "title" })
+            }
           />
           <TextInput
             placeholder="Note"
@@ -81,14 +81,23 @@ const NoteInput = ({ visible, onClose, onSubmit, note, isEdit }:Props) => {
             multiline
             style={[styles.input, styles.description]}
             placeholderTextColor={theme.text_color}
-            onChangeText={(text) => handleOnChangeText(text, "description")}
+            onChangeText={(text) =>
+              handleOnChangeText({ text, valueFor: "description" })
+            }
           />
           <View style={styles.buttonContainer}>
-            <IconButton size={15} antIconName="check" onPress={handleSubmit} />
+            <IconButton
+              size={15}
+              style={{}}
+              color={{}}
+              antIconName="check"
+              onPress={handleSubmit}
+            />
             {title.trim() || description.trim() ? (
               <IconButton
                 size={15}
                 style={{ marginLeft: 15 }}
+                color={{}}
                 antIconName="close"
                 onPress={closeBox}
               />

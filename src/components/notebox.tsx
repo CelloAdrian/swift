@@ -2,7 +2,7 @@ import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import { styles } from "./style/notebox.style";
 
-interface Props {
+type Props = {
   item: any;
   onPress: any;
 }

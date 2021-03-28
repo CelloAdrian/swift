@@ -8,7 +8,7 @@ import { useNotes } from "../context/noteprovider";
 import NoteInput from "../containers/noteinput";
 import { styles } from "./style/notedetail.style";
 
-interface Props {
+type Props = {
   ms: any;
   property: any;
   title: any;

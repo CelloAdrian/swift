@@ -3,9 +3,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface Props {
   children: any;
+  notes: any;
+  setNotes: any;
+  findNotes: any;
 }
 
-const NoteContext = createContext();
+const NoteContext = createContext({});
 
 const NoteProvider = ({children}:Props) => {
   const [notes, setNotes] = useState([]);

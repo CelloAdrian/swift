@@ -124,11 +124,17 @@ const Homepage = ({ navigation }:Props) => {
         onPress={() => setModalVisible(true)}
         antIconName="plus"
         style={styles.addButton}
+        size={{}}
+        color={{}}
       />
       <NoteInput
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         onSubmit={handleOnSubmit}
+        note={{}}
+        isEdit={{}}
+        text={{}}
+        valueFor={{}}
       />
     </>
   );

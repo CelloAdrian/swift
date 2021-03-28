@@ -3,7 +3,7 @@ import { AntDesign } from "@expo/vector-icons";
 import theme from "./theme";
 import { styles } from "./style/button.style";
 
-interface Props {
+type Props = {
   antIconName: any;
   size: any;
   color: any;
