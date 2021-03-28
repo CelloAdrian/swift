@@ -1,11 +1,11 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import Homepage from "./src/homepage";
-import NoteDetail from "./src/components/notedetail";
-import NoteProvider from "./src/context/noteprovider";
-import theme from "./src/components/theme";
+import Homepage from "@containers/homepage";
+import NoteDetail from "@components/notedetail";
+import NoteProvider from "@context/noteprovider";
+import theme from "@components/theme";
 
 const styles = StyleSheet.create({
   container: {

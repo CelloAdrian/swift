@@ -7,3 +7,5 @@ add installation instructions later
 
 ### From Google Play / App Store
 maybe release in both platforms??
+
+TODO : complete UI redesign, the current one only demonstrates pure functionality
