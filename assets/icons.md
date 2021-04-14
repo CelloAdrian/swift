@@ -1,1 +1,0 @@
-add new icon for adding notes
